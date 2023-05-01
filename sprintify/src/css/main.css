@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,300;0,400;0,500;0,600;0,800;1,200;1,500;1,600;1,800&family=Telex&display=swap");
+.board {
+  font-family: "Montserrat Alternates", sans-serif;
+  background-color: white;
+}
+.side {
+  background-color: #b1d9db;
+  height: 100vh;
+  overflow: auto;
+  position: fixed;
+  width: 20%;
+}
+.home-icon {
+  vertical-align: middle;
+  color: black;
+}
+.boards-title {
+  text-decoration: underline;
+  color: black;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.new {
+  height: 100vh;
+  position: relative;
+}
+.new-board {
+  width: auto !important;
+}
+.dash-row {
+  margin-left: -2%;
+  margin-right: 0;
+}
+.logout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid #b1d9db;
+  cursor: pointer;
+  transition: all 500ms ease-in-out;
+}
+.logout:hover {
+  background-color: #b1d9db;
+}
+.hello {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid #b1d9db;
+  cursor: pointer;
+  transition: all 500ms ease-in-out;
+}
+.hello:hover {
+  background-color: #b1d9db;
+}

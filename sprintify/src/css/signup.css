@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,300;0,400;0,500;0,600;0,800;1,200;1,500;1,600;1,800&family=Telex&display=swap");
+.signup {
+  background-color: #b1d9db !important;
+  height: 100vh;
+}
+.left {
+  background-color: #b1d9db;
+  height: 100vh;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 800;
+}
+.left h1 {
+  font-weight: 900;
+  color: white;
+  margin-top: 50%;
+  margin-left: 45%;
+  position: absolute;
+  text-shadow: 1px 1px 2px rgb(227, 7, 44);
+  z-index: 99999999999;
+}
+.right {
+  background-color: white;
+  height: 100vh;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 800;
+}
+.google-btn {
+  background-color: white;
+  color: rgb(127, 111, 111);
+  border: 1px solid rgb(232, 219, 219);
+  transition: all 0.5s ease-in-out;
+}
+.google-btn:hover {
+  background-color: #b1d9db;
+  color: rgb(255, 255, 255);
+}
+.or {
+  font-weight: 300;
+}
+
+.form-control {
+  border: none !important;
+  border-bottom: 1px solid rgb(205, 197, 197) !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+.form-control:focus {
+  border-bottom: 3px solid rgb(0, 0, 0) !important;
+}
+button.btn.btn-primary {
+  background-color: #b1d9db;
+  border-color: #b1d9db;
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+  letter-spacing: 2px;
+}
+button.btn.btn-primary:hover {
+  background-color: black;
+}
+.already {
+  font-weight: 400;
+}
+.already a {
+  color: #b1d9db;
+}
+.leaf {
+  position: absolute;
+  left: 65%;
+  top: 8%;
+  z-index: 999;
+}
+@media only screen and (max-width: 1276px) {
+  .leaf {
+    left: 30%;
+    top: 0%;
+  }
+}
+@media only screen and (max-width: 1006px) {
+  .leaf {
+    left: 0%;
+    top: 0%;
+  }
+}
