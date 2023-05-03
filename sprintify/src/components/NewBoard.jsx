@@ -29,7 +29,9 @@ const NewBoard = () => {
       console.error(error);
       alert("Failed to create board");
     }
+    handleClose();
   };
+
   return (
     <>
       <Button className="mt-5 new-board " onClick={handleShow}>

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { setCurrentUser } from "../redux/actions";
+import { fetchBoardsAction, setCurrentUser } from "../redux/actions";
 import { Col, Container, Row } from "react-bootstrap";
 import SideBar from "./SideBar";
 import Welcome from "./Welcome";
@@ -38,8 +38,9 @@ const Main = () => {
       localStorage.setItem("accessToken", searchParams.get("accessToken"));
       getMeInfo();
       navigate("/main");
+      dispatch(fetchBoardsAction(localStorage.getItem("accessToken")));
     }
-  }, [getMeInfo, navigate, searchParams]);
+  }, [dispatch, getMeInfo, navigate, searchParams]);
 
   return (
     <>

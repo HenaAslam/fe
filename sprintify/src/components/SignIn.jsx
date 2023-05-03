@@ -3,8 +3,9 @@ import "../css/signin.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../redux/actions";
 const SignIn = () => {
@@ -39,6 +40,7 @@ const SignIn = () => {
       console.log(error);
     }
   };
+
   return (
     <>
       <Container

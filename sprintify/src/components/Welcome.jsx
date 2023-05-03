@@ -65,7 +65,7 @@ const Welcome = () => {
         <h6
           className="logout mt-3 mr-n5 p-2"
           onClick={() => {
-            // localStorage.removeItem("accessToken");
+            localStorage.removeItem("accessToken");
             navigate("/");
           }}
         >
