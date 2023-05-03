@@ -1,10 +1,20 @@
+import { useEffect } from "react";
 import { Container, ListGroup, ListGroupItem } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchBoardsAction } from "../redux/actions";
 
 const SideBar = () => {
+  const token = localStorage.getItem("accessToken");
+  const dispatch = useDispatch();
   let currentUserInfo = useSelector((state) => state.currentUser.currentUser);
+  const BoardsOfLoggedUser = useSelector((state) => state.boardsOfUser.results);
+  console.log(BoardsOfLoggedUser);
   console.log(currentUserInfo);
+  useEffect(() => {
+    dispatch(fetchBoardsAction(token));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Container className="d-flex justify-content-center pt-5 side ">
       <div className="text-center">
@@ -22,18 +32,15 @@ const SideBar = () => {
         <h5 className="pt-5 boards-title ">YOUR BOARDS</h5>
 
         <ListGroup className="mt-5">
-          {/* boards.map */}
-          {/* <Link to={"/board/"+id } > */}
-          <ListGroupItem className="my-2">
-            LinkedIn Clone Project Board
-          </ListGroupItem>
+          {BoardsOfLoggedUser[0]?.boards.map((b) => (
+            <Link to={"/boards/" + b._id} key={b._id}>
+              <ListGroupItem className="my-2" style={{ color: "black" }}>
+                {b.boardname}
+              </ListGroupItem>
+            </Link>
+          ))}
+
           {/* </Link> */}
-          <ListGroupItem className="my-2">
-            Spotify Clone Project Board
-          </ListGroupItem>
-          <ListGroupItem className="my-2">
-            WhatsApp Clone Project Board
-          </ListGroupItem>
         </ListGroup>
       </div>
     </Container>

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import { MdLogout } from "react-icons/md";
 import { useSelector } from "react-redux";
 
 import { io } from "socket.io-client";
+import NewBoard from "./NewBoard";
 
 const Welcome = () => {
   let currentUserInfo = useSelector((state) => state.currentUser.currentUser);
@@ -64,7 +65,7 @@ const Welcome = () => {
         <h6
           className="logout mt-3 mr-n5 p-2"
           onClick={() => {
-            sessionStorage.removeItem("accessToken");
+            // localStorage.removeItem("accessToken");
             navigate("/");
           }}
         >
@@ -79,9 +80,7 @@ const Welcome = () => {
             {" "}
             Create boards, track progress, and achieve your goals.
           </h5>
-          <Button className="mt-5 new-board ">
-            Click here to create a new board!
-          </Button>
+          <NewBoard />
         </div>
       </Container>
     </>

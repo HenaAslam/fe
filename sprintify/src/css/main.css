@@ -53,3 +53,15 @@
 .hello:hover {
   background-color: #b1d9db;
 }
+.place {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.add-exp-modal {
+  border-radius: 10px;
+}
+.add-exp-modal .inputs {
+  background-color: white;
+  border: 1px solid black;
+  height: 30px;
+}
