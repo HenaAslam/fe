@@ -30,3 +30,13 @@ export const fetchBoardsAction = (token) => {
     }
   };
 };
+// actions.js
+
+export const UPDATE_ACCESS_TOKEN = "UPDATE_ACCESS_TOKEN";
+
+export function updateAccessToken(newToken) {
+  return {
+    type: UPDATE_ACCESS_TOKEN,
+    payload: newToken,
+  };
+}

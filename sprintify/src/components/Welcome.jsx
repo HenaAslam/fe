@@ -3,10 +3,12 @@ import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import { MdLogout } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { io } from "socket.io-client";
 import NewBoard from "./NewBoard";
+import { updateAccessToken } from "../redux/actions";
+import { persistedStore } from "../redux/store";
 
 const Welcome = () => {
   let currentUserInfo = useSelector((state) => state.currentUser.currentUser);
@@ -16,7 +18,7 @@ const Welcome = () => {
   );
   const [displayText, setDisplayText] = useState("");
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   useEffect(() => {
     localStorage.removeItem("animated-text");
     const storedText = localStorage.getItem("animated-text");
@@ -66,6 +68,10 @@ const Welcome = () => {
           className="logout mt-3 mr-n5 p-2"
           onClick={() => {
             localStorage.removeItem("accessToken");
+            dispatch(updateAccessToken(null));
+
+            // update the persisted state
+            persistedStore.persist();
             navigate("/");
           }}
         >

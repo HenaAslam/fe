@@ -2,12 +2,13 @@ import { Button, Container, Form } from "react-bootstrap";
 import "../css/signin.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { persistedStore } from "../redux/store";
 
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../redux/actions";
+import { setCurrentUser, updateAccessToken } from "../redux/actions";
 const SignIn = () => {
   const [user, setUser] = useState({
     email: "",
@@ -34,6 +35,10 @@ const SignIn = () => {
         localStorage.setItem("accessToken", currentUser.accessToken);
         dispatch(setCurrentUser(currentUser.user));
         console.log(currentUser.accessToken);
+        dispatch(updateAccessToken(localStorage.getItem("accessToken")));
+
+        // update the persisted state
+        persistedStore.persist();
         navigate("/main");
       }
     } catch (error) {
