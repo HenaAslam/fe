@@ -9,7 +9,7 @@ const SideBar = () => {
   const dispatch = useDispatch();
   let currentUserInfo = useSelector((state) => state.currentUser.currentUser);
   const BoardsOfLoggedUser = useSelector((state) => state.boardsOfUser.results);
-  console.log(BoardsOfLoggedUser);
+
   console.log(currentUserInfo);
   useEffect(() => {
     dispatch(fetchBoardsAction(token));
@@ -18,7 +18,7 @@ const SideBar = () => {
   return (
     <Container className="d-flex justify-content-center pt-5 side ">
       <div className="text-center">
-        <Link to="/">
+        <Link to="/main">
           {" "}
           <div>
             <img
