@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-function Board({ board, onAddColumn, onDragEnd }) {
+import axios from "axios";
+
+function Board({ board, onAddColumn, setBoard, boardId }) {
   const [newColumnName, setNewColumnName] = useState("");
 
   const handleAddColumn = () => {
@@ -12,9 +14,42 @@ function Board({ board, onAddColumn, onDragEnd }) {
     setNewColumnName(event.target.value);
   };
 
+  const handleDragEnd = (result) => {
+    const { source, destination, draggableId } = result;
+
+    // If dropped outside the droppable area
+    if (!destination) {
+      return;
+    }
+
+    const sourceIndex = source.index;
+    const destinationIndex = destination.index;
+
+    setBoard((prevBoard) => {
+      const columns = [...prevBoard.columns];
+      const [removed] = columns.splice(sourceIndex, 1);
+      columns.splice(destinationIndex, 0, removed);
+      return { ...prevBoard, columns };
+    });
+
+    // Save updated board to database using API call
+    const url = `${process.env.REACT_APP_BE_URL}/boards/${boardId}/columns/${draggableId}/move`;
+    const data = { destinationIndex };
+    axios.patch(url, data);
+  };
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={handleDragEnd}>
       <div className="board">
+        <div className="new-column">
+          <input
+            type="text"
+            placeholder="New Column Name"
+            value={newColumnName}
+            onChange={handleNewColumnNameChange}
+          />
+          <button onClick={handleAddColumn}>Add Column</button>
+        </div>
         <div className="columns">
           <Droppable droppableId="columns" direction="horizontal">
             {(provided) => (
@@ -44,20 +79,6 @@ function Board({ board, onAddColumn, onDragEnd }) {
                   </Draggable>
                 ))}
                 {provided.placeholder}
-                <div className="column">
-                  <input
-                    type="text"
-                    placeholder="New Column Name"
-                    value={newColumnName}
-                    onChange={handleNewColumnNameChange}
-                  />
-                  <button
-                    onClick={handleAddColumn}
-                    draggableid="add-column-button"
-                  >
-                    Add Column
-                  </button>
-                </div>
               </div>
             )}
           </Droppable>
@@ -66,4 +87,5 @@ function Board({ board, onAddColumn, onDragEnd }) {
     </DragDropContext>
   );
 }
+
 export default Board;

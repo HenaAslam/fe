@@ -109,6 +109,8 @@ const BoardTasks = (props) => {
         board={board}
         onAddColumn={handleAddColumn}
         onDragEnd={handleDragEnd}
+        setBoard={setBoard}
+        boardId={selectedBoard._id}
       />
     </Container>
   );
