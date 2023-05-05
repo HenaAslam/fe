@@ -101,7 +101,8 @@ const BoardTasks = (props) => {
   }
 
   return (
-    <Container className="d-flex flex-column justify-content-center align-items-center new">
+    // <Container className="d-flex flex-column justify-content-center align-items-center ">
+    <Container className="mt-5 text-center" style={{ overflowX: "auto" }}>
       <h4 style={{ fontWeight: "bold" }}>{selectedBoard?.boardname} </h4>
       <h6>{selectedBoard?.description}</h6>
       {console.log("board", board)}

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
-
+import { Button, Form } from "react-bootstrap";
+import { FaPlus, FaTrash } from "react-icons/fa";
 function Board({ board, onAddColumn, setBoard, boardId }) {
   const [newColumnName, setNewColumnName] = useState("");
 
@@ -16,6 +17,7 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
 
   const handleDragEnd = (result) => {
     const { source, destination, draggableId } = result;
+    let columnId = draggableId.replace("column-", "");
 
     // If dropped outside the droppable area
     if (!destination) {
@@ -33,7 +35,7 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
     });
 
     // Save updated board to database using API call
-    const url = `${process.env.REACT_APP_BE_URL}/boards/${boardId}/columns/${draggableId}/move`;
+    const url = `${process.env.REACT_APP_BE_URL}/boards/${boardId}/columns/${columnId}/move`;
     const data = { destinationIndex };
     axios.patch(url, data);
   };
@@ -42,13 +44,27 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
     <DragDropContext onDragEnd={handleDragEnd}>
       <div className="board">
         <div className="new-column">
-          <input
-            type="text"
-            placeholder="New Column Name"
-            value={newColumnName}
-            onChange={handleNewColumnNameChange}
-          />
-          <button onClick={handleAddColumn}>Add Column</button>
+          <Form className="mb-5 text-center d-flex flex-column align-items-center">
+            <Form.Group>
+              <Form.Control
+                type="text"
+                className="text-center"
+                placeholder="New Column Name"
+                value={newColumnName}
+                onChange={handleNewColumnNameChange}
+                style={{ width: "350px" }}
+              />
+            </Form.Group>
+            <Button
+              onClick={handleAddColumn}
+              style={{ fontSize: "14px", width: "350px" }}
+              variant="primary"
+              className="rounded-pill py-1 px-2"
+              // style={{ width: "350px" }}
+            >
+              Add Column
+            </Button>
+          </Form>
         </div>
         <div className="columns">
           <Droppable droppableId="columns" direction="horizontal">
@@ -72,7 +88,12 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
                         className="column"
                         key={column._id}
                       >
-                        <h2>{column.name}</h2>
+                        <h6 className="text-center d-flex">
+                          {column.name}{" "}
+                          <div className="ml-auto">
+                            <FaPlus /> <FaTrash className="ml-2" />{" "}
+                          </div>{" "}
+                        </h6>
                         {/* Add task components here */}
                       </div>
                     )}

@@ -8,7 +8,7 @@
   max-height: 100vh;
   overflow-y: scroll;
   position: fixed;
-  width: 20%;
+  width: 15%;
   z-index: 999;
   min-height: 100vh;
 }
@@ -68,8 +68,13 @@
   border: 1px solid black;
   height: 30px;
 }
-.column-list {
+/* .column-list {
   display: inline-flex;
+} */
+.column-list {
+  display: flex;
+
+  overflow-x: auto !important;
 }
 
 .column {
@@ -78,4 +83,8 @@
   background-color: #f2f2f2;
   margin-right: 10px;
   padding: 10px;
+  min-width: 200px !important;
+}
+.board-tasks {
+  margin-left: 10%;
 }
