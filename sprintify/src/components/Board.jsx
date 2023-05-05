@@ -3,6 +3,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 import { FaPlus, FaTrash } from "react-icons/fa";
+import TaskAdd from "./TaskAdd";
 function Board({ board, onAddColumn, setBoard, boardId }) {
   const [newColumnName, setNewColumnName] = useState("");
 
@@ -60,7 +61,6 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
               style={{ fontSize: "14px", width: "350px" }}
               variant="primary"
               className="rounded-pill py-1 px-2"
-              // style={{ width: "350px" }}
             >
               Add Column
             </Button>
@@ -94,7 +94,7 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
                             <FaPlus /> <FaTrash className="ml-2" />{" "}
                           </div>{" "}
                         </h6>
-                        {/* Add task components here */}
+                        <TaskAdd />
                       </div>
                     )}
                   </Draggable>
