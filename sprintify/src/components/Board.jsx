@@ -2,7 +2,8 @@ import { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
-import { FaPlus, FaTrash } from "react-icons/fa";
+
+import TaskAdd from "./TaskAdd";
 
 function Board({ board, onAddColumn, setBoard, boardId }) {
   const [newColumnName, setNewColumnName] = useState("");
@@ -88,12 +89,11 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
                         className="column"
                         key={column._id}
                       >
-                        <h6 className="text-center d-flex">
-                          {column.name}{" "}
-                          <div className="ml-auto">
-                            <FaPlus /> <FaTrash className="ml-2" />{" "}
-                          </div>{" "}
-                        </h6>
+                        <TaskAdd
+                          columnname={column.name}
+                          boardId={boardId}
+                          columnId={column._id}
+                        />
                       </div>
                     )}
                   </Draggable>
