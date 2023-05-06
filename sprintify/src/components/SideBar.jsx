@@ -15,6 +15,7 @@ const SideBar = () => {
     dispatch(fetchBoardsAction(token));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <Container className="d-flex justify-content-center pt-5 side ">
       <div className="text-center">

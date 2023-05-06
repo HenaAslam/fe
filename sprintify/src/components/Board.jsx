@@ -3,7 +3,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 import { FaPlus, FaTrash } from "react-icons/fa";
-import TaskAdd from "./TaskAdd";
+
 function Board({ board, onAddColumn, setBoard, boardId }) {
   const [newColumnName, setNewColumnName] = useState("");
 
@@ -94,7 +94,6 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
                             <FaPlus /> <FaTrash className="ml-2" />{" "}
                           </div>{" "}
                         </h6>
-                        <TaskAdd />
                       </div>
                     )}
                   </Draggable>
