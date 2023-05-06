@@ -28,6 +28,7 @@ const BoardTasks = (props) => {
           }
         );
         const data = await response.json();
+        console.log("data", data);
         setBoard(data);
       } catch (error) {
         console.error(error);
