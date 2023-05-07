@@ -34,7 +34,7 @@ const TaskAdd = ({ columnname, boardId, columnId, board }) => {
       console.log(responseData);
     } catch (error) {
       console.error(error);
-      alert("Failed to create board");
+      alert("Failed to create task");
     }
     handleClose();
   };
@@ -115,22 +115,11 @@ const TaskAdd = ({ columnname, boardId, columnId, board }) => {
       </Modal>
       <ListGroup>
         {board.columns.map((c) => {
-          console.log(c._id, columnId);
-          if (c.id === columnId) {
-            // check if this is the current column
-            return (
-              <ListGroupItem key={c.id}>
-                <h6>{c.name}</h6>
-                <ul>
-                  {c.tasks.map((t) => (
-                    <li key={t.id}>{t.title}</li>
-                  ))}
-                </ul>
-              </ListGroupItem>
-            );
-          } else {
-            return null; // if this is not the current column, return null to skip rendering
-          }
+          c.tasks?.map((t) => {
+            if (t.columnId === c._id) {
+              return <ListGroupItem key={t._id}>{t.title}</ListGroupItem>;
+            }
+          });
         })}
       </ListGroup>
     </>
