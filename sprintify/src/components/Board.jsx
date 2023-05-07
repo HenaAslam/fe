@@ -93,6 +93,7 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
                           columnname={column.name}
                           boardId={boardId}
                           columnId={column._id}
+                          board={board}
                         />
                       </div>
                     )}

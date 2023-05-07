@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
-import { FaPlus, FaTrash } from "react-icons/fa";
+import { Button, Form, ListGroup, ListGroupItem, Modal } from "react-bootstrap";
+import { FaCreativeCommonsPd, FaPlus, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTasksAction } from "../redux/actions";
 
-const TaskAdd = ({ columnname, boardId, columnId }) => {
-  const dispatch = useDispatch();
+const TaskAdd = ({ columnname, boardId, columnId, board }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [assignedTo, setAssignedTo] = useState("");
@@ -15,8 +14,7 @@ const TaskAdd = ({ columnname, boardId, columnId }) => {
     setShow(true);
   };
   const handleClose = () => setShow(false);
-  const tasksOfBoard = useSelector((state) => state.tasksOfBoard.results);
-  console.log(tasksOfBoard);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = { title, description, assignedTo, dueDate };
@@ -40,16 +38,7 @@ const TaskAdd = ({ columnname, boardId, columnId }) => {
     }
     handleClose();
   };
-  useEffect(() => {
-    dispatch(
-      fetchTasksAction(
-        `${localStorage.getItem("accessToken")}`,
-        `${boardId}`,
-        `${columnId}`
-      )
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
   return (
     <>
       <h6 className="text-center d-flex">
@@ -124,6 +113,26 @@ const TaskAdd = ({ columnname, boardId, columnId }) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <ListGroup>
+        {board.columns.map((c) => {
+          console.log(c._id, columnId);
+          if (c.id === columnId) {
+            // check if this is the current column
+            return (
+              <ListGroupItem key={c.id}>
+                <h6>{c.name}</h6>
+                <ul>
+                  {c.tasks.map((t) => (
+                    <li key={t.id}>{t.title}</li>
+                  ))}
+                </ul>
+              </ListGroupItem>
+            );
+          } else {
+            return null; // if this is not the current column, return null to skip rendering
+          }
+        })}
+      </ListGroup>
     </>
   );
 };
