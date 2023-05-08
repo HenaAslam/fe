@@ -63,7 +63,7 @@ const AddNewTask = ({ columnName, boardId, columnId, setBoard, board }) => {
   };
   return (
     <>
-      <h6 className="text-center d-flex">
+      <h6 className="text-center d-flex mb-5">
         {columnName}{" "}
         <div className="ml-auto">
           <FaPlus onClick={handleShow} style={{ cursor: "pointer" }} />{" "}
