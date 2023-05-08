@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
@@ -8,6 +8,33 @@ import Column from "./Column";
 
 function Board({ board, onAddColumn, setBoard, boardId }) {
   const [newColumnName, setNewColumnName] = useState("");
+  const [columns, setColumns] = useState([]);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const fetchColumns = async () => {
+      const res = await axios.get(
+        `${process.env.REACT_APP_BE_URL}/boards/columns`
+      );
+      setColumns(res.data.columns);
+    };
+    const fetchTasks = async () => {
+      const res = await axios.get(
+        `${process.env.REACT_APP_BE_URL}/boards/tasks`
+      );
+      setTasks(res.data.tasks);
+    };
+    fetchColumns();
+    fetchTasks();
+  }, []);
+
+  const handleTaskDrop = (updatedTask) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task._id === updatedTask._id ? updatedTask : task
+      )
+    );
+  };
 
   const handleAddColumn = () => {
     onAddColumn(newColumnName);
@@ -100,7 +127,10 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
                         <Column
                           key={column._id}
                           column={column}
-                          tasks={column.tasks}
+                          tasks={tasks.filter(
+                            (task) => task.columnId === column._id
+                          )}
+                          onTaskDrop={handleTaskDrop}
                         />
                       </div>
                     )}
