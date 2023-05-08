@@ -111,3 +111,10 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.task-inside-column {
+  padding: 10px;
+  border: 1px solid black;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 10px;
+}

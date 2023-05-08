@@ -4,6 +4,7 @@ import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 
 import AddNewTask from "./AddNewTask";
+import Column from "./Column";
 
 function Board({ board, onAddColumn, setBoard, boardId }) {
   const [newColumnName, setNewColumnName] = useState("");
@@ -95,6 +96,11 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
                           columnId={column._id}
                           setBoard={setBoard}
                           board={board}
+                        />
+                        <Column
+                          key={column._id}
+                          column={column}
+                          tasks={column.tasks}
                         />
                       </div>
                     )}
