@@ -30,6 +30,7 @@ const AddNewTask = ({ columnName, boardId, columnId, setBoard, board }) => {
         }
       );
       const newTask = await response.json();
+      console.log(board);
       const updatedColumns = board.columns.map((column) => {
         if (column._id === columnId) {
           // add the new task to the column's tasks array

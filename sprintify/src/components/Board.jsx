@@ -8,6 +8,7 @@ import Column from "./Column";
 
 function Board({ board, onAddColumn, setBoard, boardId }) {
   const [newColumnName, setNewColumnName] = useState("");
+  const [tasks, setTasks] = useState([]);
 
   const handleAddColumn = () => {
     onAddColumn(newColumnName);
@@ -101,6 +102,9 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
                           key={column._id}
                           column={column}
                           tasks={column.tasks}
+                          boardId={boardId}
+                          setBoard={setBoard}
+                          board={board}
                         />
                       </div>
                     )}
