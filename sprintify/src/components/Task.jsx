@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { FaPencilAlt } from "react-icons/fa";
+
+import {
+  FiChevronLeft,
+  FiChevronUp,
+  FiChevronDown,
+  FiChevronRight,
+} from "react-icons/fi";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const Task = ({ task, index, onEditTask }) => {
+const Task = ({ task, index, onEditTask, tasks }) => {
   const [showModal, setShowModal] = useState(false);
   const [editedTask, setEditedTask] = useState({
     title: task.title,
@@ -27,15 +33,33 @@ const Task = ({ task, index, onEditTask }) => {
     handleClose();
   };
 
+  const lastIndex = tasks.length - 1;
   return (
     <>
-      <div className="task-inside-column d-flex">
-        {task.title}{" "}
-        <FaPencilAlt
-          className="ml-auto"
-          style={{ cursor: "pointer" }}
+      <div className="task-inside-column d-flex align-items-center justify-content-center position-relative">
+        {index !== 0 && (
+          <div className="arrow top">
+            <FiChevronUp />
+          </div>
+        )}
+        {index !== lastIndex && (
+          <div className="arrow bottom">
+            <FiChevronDown />
+          </div>
+        )}
+        <div className="arrow lefttt">
+          <FiChevronLeft />
+        </div>
+        <div className="arrow righttt">
+          <FiChevronRight />
+        </div>
+        <div
+          className="task-title d-flex align-items-center justify-content-center"
+          style={{ cursor: "pointer", wordBreak: "break-all" }}
           onClick={handleShow}
-        />
+        >
+          {task.title}
+        </div>
       </div>
 
       <Modal show={showModal} onHide={handleClose}>

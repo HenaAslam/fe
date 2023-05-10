@@ -85,6 +85,9 @@
   padding: 10px;
   min-width: 200px !important;
   margin-bottom: 10px;
+  border-radius: 10px;
+  border: none;
+  overflow: auto;
 }
 .board-tasks {
   margin-left: 10%;
@@ -112,9 +115,50 @@
   background: #555;
 }
 .task-inside-column {
-  padding: 10px;
+  padding: 30px;
   border: 1px solid black;
   font-weight: 600;
   font-size: 16px;
   margin: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #b1d9db;
+}
+
+.task-title {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  color: green;
+}
+
+.arrow {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+
+.top {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottom {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.lefttt {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.righttt {
+  top: 50%;
+  right: 0;
+  background-color: none !important;
+  transform: translateY(-50%);
 }

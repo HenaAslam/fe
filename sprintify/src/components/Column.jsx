@@ -46,7 +46,9 @@ const Column = ({ column, tasks, boardId, setBoard, board }) => {
     <div>
       {tasks.map((task, index) => (
         <Task
+          tasks={tasks}
           key={task._id}
+          index={index}
           task={task}
           onEditTask={(updatedTask) =>
             onEditTask(boardId, column._id, task, updatedTask)
