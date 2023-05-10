@@ -46,6 +46,10 @@ const Column = ({ column, tasks, boardId, setBoard, board }) => {
     <div>
       {tasks.map((task, index) => (
         <Task
+          setBoard={setBoard}
+          columnId={column._id}
+          boardId={boardId}
+          board={board}
           tasks={tasks}
           key={task._id}
           index={index}

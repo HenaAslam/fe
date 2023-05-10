@@ -1,0 +1,29 @@
+<div className="task-inside-column d-flex align-items-center justify-content-center position-relative">
+  {isFirstColumn ? null : (
+    <div className="arrow top">
+      <FiChevronUp />
+    </div>
+  )}
+  {isLastColumn ? null : (
+    <div className="arrow bottom">
+      <FiChevronDown />
+    </div>
+  )}
+  {isFirstColumn ? null : (
+    <div className="arrow lefttt">
+      <FiChevronLeft />
+    </div>
+  )}
+  {isLastColumn ? null : (
+    <div className="arrow righttt">
+      <FiChevronRight />
+    </div>
+  )}
+  <div
+    className="task-title d-flex align-items-center justify-content-center"
+    style={{ cursor: "pointer", wordBreak: "break-all" }}
+    onClick={handleShow}
+  >
+    {task.title}
+  </div>
+</div>
