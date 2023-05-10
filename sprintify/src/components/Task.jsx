@@ -3,8 +3,9 @@ import { FaPencilAlt } from "react-icons/fa";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { Draggable } from "react-beautiful-dnd";
 
-const Task = ({ task, index, onEditTask }) => {
+const Task = ({ task, index, onEditTask, boardId, columnId, setBoard }) => {
   const [showModal, setShowModal] = useState(false);
   const [editedTask, setEditedTask] = useState({
     title: task.title,
@@ -29,14 +30,24 @@ const Task = ({ task, index, onEditTask }) => {
 
   return (
     <>
-      <div className="task-inside-column d-flex">
-        {task.title}{" "}
-        <FaPencilAlt
-          className="ml-auto"
-          style={{ cursor: "pointer" }}
-          onClick={handleShow}
-        />
-      </div>
+      <Draggable key={task._id} draggableId={`task-${task._id}`} index={1}>
+        {(provided) => (
+          <div
+            className="task-inside-column d-flex"
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+          >
+            {task.title}{" "}
+            <FaPencilAlt
+              className="ml-auto"
+              style={{ cursor: "pointer" }}
+              onClick={handleShow}
+            />
+            {provided.placeholder}
+          </div>
+        )}
+      </Draggable>
 
       <Modal show={showModal} onHide={handleClose}>
         <Form onSubmit={handleSubmit}>

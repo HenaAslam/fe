@@ -8,7 +8,6 @@ import Column from "./Column";
 
 function Board({ board, onAddColumn, setBoard, boardId }) {
   const [newColumnName, setNewColumnName] = useState("");
-  const [tasks, setTasks] = useState([]);
 
   const handleAddColumn = () => {
     onAddColumn(newColumnName);
@@ -81,7 +80,7 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
                   <Draggable
                     key={column._id}
                     draggableId={`column-${column._id}`}
-                    index={index}
+                    index={parseInt(index)}
                   >
                     {(provided) => (
                       <div
