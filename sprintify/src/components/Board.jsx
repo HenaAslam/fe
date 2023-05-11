@@ -5,10 +5,11 @@ import { Button, Form } from "react-bootstrap";
 
 import AddNewTask from "./AddNewTask";
 import Column from "./Column";
+import { useNavigate } from "react-router-dom";
 
 function Board({ board, onAddColumn, setBoard, boardId }) {
   const [newColumnName, setNewColumnName] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const navigate = useNavigate();
 
   const handleAddColumn = () => {
     onAddColumn(newColumnName);
@@ -44,6 +45,33 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
     axios.patch(url, data);
   };
 
+  const handleDeleteBoard = async () => {
+    try {
+      const token = localStorage.getItem("accessToken");
+
+      const response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/boards/${boardId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+
+      // return await response.json();
+      navigate("/main");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <div className="board">
@@ -66,6 +94,14 @@ function Board({ board, onAddColumn, setBoard, boardId }) {
               className="rounded-pill py-1 px-2"
             >
               Add Column
+            </Button>
+            <Button
+              onClick={handleDeleteBoard}
+              style={{ fontSize: "14px", width: "350px" }}
+              variant="primary"
+              className="rounded-pill py-1 px-2 mt-3"
+            >
+              Delete Board
             </Button>
           </Form>
         </div>

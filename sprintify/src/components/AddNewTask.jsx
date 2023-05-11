@@ -25,6 +25,7 @@ const AddNewTask = ({ columnName, boardId, columnId, setBoard, board }) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
           body: JSON.stringify(task),
         }
@@ -59,6 +60,7 @@ const AddNewTask = ({ columnName, boardId, columnId, setBoard, board }) => {
         `${process.env.REACT_APP_BE_URL}/boards/${boardId}/columns/${columnId}`,
         {
           method: "DELETE",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         }
       );
       if (!response.ok) {

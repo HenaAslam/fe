@@ -51,6 +51,7 @@ const Task = ({
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
           body: JSON.stringify({
             currentColumnId: columnId,
@@ -63,7 +64,10 @@ const Task = ({
       }
 
       const updatedBoardResponse = await fetch(
-        `${process.env.REACT_APP_BE_URL}/boards/${boardId}`
+        `${process.env.REACT_APP_BE_URL}/boards/${boardId}`,
+        {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        }
       );
       if (!updatedBoardResponse.ok) {
         throw new Error("Failed to fetch updated board data");
@@ -84,6 +88,7 @@ const Task = ({
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
           body: JSON.stringify({
             currentColumnId: columnId,
@@ -95,16 +100,17 @@ const Task = ({
         throw new Error("Failed to move task to the right");
       }
 
-      // Fetch the updated board data from the server
       const updatedBoardResponse = await fetch(
-        `${process.env.REACT_APP_BE_URL}/boards/${boardId}`
+        `${process.env.REACT_APP_BE_URL}/boards/${boardId}`,
+        {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        }
       );
       if (!updatedBoardResponse.ok) {
         throw new Error("Failed to fetch updated board data");
       }
       const updatedBoard = await updatedBoardResponse.json();
 
-      // Update the state of the board to the updated data
       setBoard(updatedBoard);
     } catch (error) {
       console.log(error);
@@ -116,6 +122,7 @@ const Task = ({
         `${process.env.REACT_APP_BE_URL}/boards/${boardId}/columns/${columnId}/tasks/${task._id}`,
         {
           method: "DELETE",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         }
       );
       const response = await fetch(
@@ -137,6 +144,7 @@ const Task = ({
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
           body: JSON.stringify({
             currentColumnId: columnId,
@@ -150,7 +158,10 @@ const Task = ({
 
       // Fetch the updated board data from the server
       const updatedBoardResponse = await fetch(
-        `${process.env.REACT_APP_BE_URL}/boards/${boardId}`
+        `${process.env.REACT_APP_BE_URL}/boards/${boardId}`,
+        {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        }
       );
       if (!updatedBoardResponse.ok) {
         throw new Error("Failed to fetch updated board data");
@@ -172,6 +183,7 @@ const Task = ({
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
           body: JSON.stringify({
             currentColumnId: columnId,
@@ -185,7 +197,10 @@ const Task = ({
 
       // Fetch the updated board data from the server
       const updatedBoardResponse = await fetch(
-        `${process.env.REACT_APP_BE_URL}/boards/${boardId}`
+        `${process.env.REACT_APP_BE_URL}/boards/${boardId}`,
+        {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        }
       );
       if (!updatedBoardResponse.ok) {
         throw new Error("Failed to fetch updated board data");
