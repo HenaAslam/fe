@@ -24,6 +24,7 @@ const NewBoard = () => {
         body: JSON.stringify(data),
       });
       const responseData = await response.json();
+
       console.log(responseData);
     } catch (error) {
       console.error(error);
