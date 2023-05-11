@@ -110,6 +110,24 @@ const Task = ({
       console.log(error);
     }
   };
+  async function deleteTask() {
+    try {
+      await fetch(
+        `${process.env.REACT_APP_BE_URL}/boards/${boardId}/columns/${columnId}/tasks/${task._id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/boards/${boardId}`
+      );
+      const board = await response.json();
+      setBoard(board);
+    } catch (err) {
+      console.error(err);
+    }
+    handleClose();
+  }
 
   const handleMoveTop = async () => {
     try {
@@ -274,8 +292,8 @@ const Task = ({
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Cancel
+            <Button variant="secondary" onClick={deleteTask}>
+              Delete task
             </Button>
             <Button type="submit" variant="primary">
               Save Changes

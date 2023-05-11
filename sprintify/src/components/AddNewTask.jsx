@@ -53,6 +53,33 @@ const AddNewTask = ({ columnName, boardId, columnId, setBoard, board }) => {
     handleClose();
   };
 
+  const deleteColumn = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/boards/${boardId}/columns/${columnId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const deletedColumn = await response.json();
+      console.log("Deleted column:", deletedColumn);
+
+      // Remove the deleted column from the board array
+      const updatedBoard = {
+        ...board,
+        columns: board.columns.filter((column) => column._id !== columnId),
+      };
+
+      // Update the state of the board in your React component
+      setBoard(updatedBoard);
+    } catch (error) {
+      console.error("Error deleting column:", error);
+      // Handle the error in your UI
+    }
+  };
   const onAddTask = () => {
     handleAddTask(task);
     setTask({
@@ -66,9 +93,9 @@ const AddNewTask = ({ columnName, boardId, columnId, setBoard, board }) => {
     <>
       <h6 className="text-center d-flex mb-5">
         {columnName}{" "}
-        <div className="ml-auto">
+        <div className="ml-auto" style={{ cursor: "pointer" }}>
           <FaPlus onClick={handleShow} style={{ cursor: "pointer" }} />{" "}
-          <FaTrash className="ml-2" />{" "}
+          <FaTrash className="ml-2" onClick={deleteColumn} />{" "}
         </div>{" "}
       </h6>
       <Modal show={show} onHide={handleClose}>
