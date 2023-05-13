@@ -1,21 +1,35 @@
 import { Container } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import Board from "./Board";
+import { fetchBoardsAction } from "../redux/actions";
 
 const BoardTasks = (props) => {
   const params = useParams();
 
   const BoardsOfLoggedUser = useSelector((state) => state.boardsOfUser.results);
 
-  let selectedBoard = BoardsOfLoggedUser[0].boards?.find(
+  const [board, setBoard] = useState(null);
+  const dispatch = useDispatch();
+  const updatedBoard = useSelector((state) => state.addBoard.board);
+  const token = localStorage.getItem("accessToken");
+  const [c, setC] = useState(null);
+  let a;
+  useEffect(() => {
+    const b = async () => {
+      a = await dispatch(fetchBoardsAction(token));
+      console.log(a);
+      setC(a);
+    };
+    b();
+  }, [updatedBoard, token, dispatch]);
+
+  console.log("c", c);
+  let selectedBoard = c?.boards?.find(
     (b) => b._id.toString() === params.id.toString()
   );
-
-  const [board, setBoard] = useState(null);
-
   useEffect(() => {
     const fetchBoard = async () => {
       try {
