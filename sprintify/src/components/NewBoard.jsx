@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { ADD_BOARD } from "../redux/actions";
 
 const NewBoard = () => {
+  const dispatch = useDispatch();
+
   const [show, setShow] = useState(false);
 
   const [boardname, setBoardname] = useState("");
@@ -24,6 +28,10 @@ const NewBoard = () => {
         body: JSON.stringify(data),
       });
       const responseData = await response.json();
+      dispatch({
+        type: ADD_BOARD,
+        payload: responseData,
+      });
 
       console.log(responseData);
     } catch (error) {

@@ -1,4 +1,4 @@
-import { GET_BOARDS } from "../actions";
+import { GET_BOARDS, ADD_BOARD } from "../actions";
 
 const initialState = {
   results: [],
@@ -10,6 +10,17 @@ const getBoardsReducer = (state = initialState, action) => {
         (board) => board.id === action.payload.id
       );
       if (boardExists) {
+        return state;
+      }
+      return {
+        ...state,
+        results: [...state.results, action.payload],
+      };
+    case ADD_BOARD:
+      const boardExistss = state.results.some(
+        (board) => board.id === action.payload.id
+      );
+      if (boardExistss) {
         return state;
       }
       return {

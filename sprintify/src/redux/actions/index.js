@@ -1,5 +1,6 @@
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const GET_BOARDS = "GET_BOARDS";
+export const ADD_BOARD = "ADD_BOARD";
 
 export const setCurrentUser = (currentUser) => {
   return {
@@ -23,6 +24,7 @@ export const fetchBoardsAction = (token) => {
           type: GET_BOARDS,
           payload: boards,
         });
+        return boards;
       } else {
         console.log("Error");
       }
