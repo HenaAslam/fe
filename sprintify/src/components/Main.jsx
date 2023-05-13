@@ -1,15 +1,17 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { fetchBoardsAction, setCurrentUser } from "../redux/actions";
 import { Col, Container, Row } from "react-bootstrap";
 import SideBar from "./SideBar";
 import Welcome from "./Welcome";
 import "../css/main.css";
-const Main = () => {
+const Main = ({ boardCount, setBoardCount }) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  console.log(boardCount);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getMeInfo = async () => {
@@ -47,10 +49,10 @@ const Main = () => {
       <Container fluid className=" board">
         <Row noGutters className="dash-row">
           <Col xs={2}>
-            <SideBar />
+            <SideBar boardCount={boardCount} setBoardCount={setBoardCount} />
           </Col>
           <Col xs={10}>
-            <Welcome />
+            <Welcome boardCount={boardCount} setBoardCount={setBoardCount} />
           </Col>
         </Row>
       </Container>

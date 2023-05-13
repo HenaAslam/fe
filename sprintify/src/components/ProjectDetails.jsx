@@ -4,7 +4,7 @@ import SideBar from "./SideBar";
 
 import BoardTasks from "./BoardTasks";
 
-const ProjectDetails = () => {
+const ProjectDetails = ({ boardCount, setBoardCount }) => {
   return (
     <>
       <Container fluid className=" board">
@@ -13,7 +13,7 @@ const ProjectDetails = () => {
             <SideBar />
           </Col>
           <Col xs={10}>
-            <BoardTasks />
+            <BoardTasks boardCount={boardCount} setBoardCount={setBoardCount} />
           </Col>
         </Row>
       </Container>

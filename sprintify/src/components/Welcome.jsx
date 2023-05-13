@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import NewBoard from "./NewBoard";
 
-const Welcome = () => {
+const Welcome = ({ boardCount, setBoardCount }) => {
   let currentUserInfo = useSelector((state) => state.currentUser.currentUser);
 
   const [text] = useState(
@@ -80,7 +80,7 @@ const Welcome = () => {
             {" "}
             Create boards, track progress, and achieve your goals.
           </h5>
-          <NewBoard />
+          <NewBoard boardCount={boardCount} setBoardCount={setBoardCount} />
         </div>
       </Container>
     </>

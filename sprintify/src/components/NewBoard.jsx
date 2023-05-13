@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 
-const NewBoard = () => {
+const NewBoard = ({ boardCount, setBoardCount }) => {
   const [show, setShow] = useState(false);
 
   const [boardname, setBoardname] = useState("");
@@ -24,6 +24,7 @@ const NewBoard = () => {
         body: JSON.stringify(data),
       });
       const responseData = await response.json();
+      setBoardCount((prevCount) => prevCount + 1);
 
       console.log(responseData);
     } catch (error) {

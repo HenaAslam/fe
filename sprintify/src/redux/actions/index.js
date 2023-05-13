@@ -23,6 +23,7 @@ export const fetchBoardsAction = (token) => {
           type: GET_BOARDS,
           payload: boards,
         });
+        return boards;
       } else {
         console.log("Error");
       }

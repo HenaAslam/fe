@@ -1,19 +1,36 @@
 import { Container } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import Board from "./Board";
+import { fetchBoardsAction } from "../redux/actions";
 
-const BoardTasks = (props) => {
+const BoardTasks = ({ boardCount, setBoardCount }) => {
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("accessToken");
+
+  const [fetched, setFetched] = useState([]);
+  let fetchedBoardss;
+
+  useEffect(() => {
+    const a = async () => {
+      fetchedBoardss = await dispatch(fetchBoardsAction(token));
+      console.log("f", fetchedBoardss);
+      setFetched(fetchedBoardss);
+    };
+    a();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, token, boardCount]);
   const params = useParams();
 
-  const BoardsOfLoggedUser = useSelector((state) => state.boardsOfUser.results);
-
-  let selectedBoard = BoardsOfLoggedUser[0].boards?.find(
-    (b) => b._id.toString() === params.id.toString()
-  );
-
+  let BoardsOfLoggedUser = useSelector((state) => state.boardsOfUser.results);
+  let selectedBoard;
+  fetchedBoardss?.length > 0 &&
+    (selectedBoard = fetchedBoardss.find(
+      (b) => b?._id.toString() === params.id.toString()
+    ));
+  console.log(selectedBoard);
   const [board, setBoard] = useState(null);
 
   useEffect(() => {
@@ -34,8 +51,9 @@ const BoardTasks = (props) => {
         console.error(error);
       }
     };
-    fetchBoard();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (selectedBoard) {
+      fetchBoard();
+    }
   }, [selectedBoard]);
 
   const handleAddColumn = async (columnName) => {
