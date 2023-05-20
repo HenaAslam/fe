@@ -35,29 +35,30 @@ const Welcome = () => {
     }
   }, [text, displayText]);
 
-  useEffect(() => {
-    const socket = io("http://localhost:3044", { transports: ["websocket"] });
+  // useEffect(() => {
+  //   const socket = io("http://localhost:3044", { transports: ["websocket"] });
 
-    socket.on("connect", () => {
-      console.log("Connected to socket server!");
-    });
+  //   socket.on("connect", () => {
+  //     console.log("Connected to socket server!");
+  //     socket.emit("sendUserId", currentUserInfo._id);
+  //   });
 
-    socket.on("welcome", (welcomeMessage) => {
-      console.log(welcomeMessage);
-    });
+  //   socket.on("welcome", (welcomeMessage) => {
+  //     console.log(welcomeMessage);
+  //   });
 
-    socket.on("disconnect", () => {
-      console.log("Disconnected from socket server!");
-    });
+  //   socket.on("disconnect", () => {
+  //     console.log("Disconnected from socket server!");
+  //   });
 
-    socket.on("error", (error) => {
-      console.error(error);
-    });
+  //   socket.on("error", (error) => {
+  //     console.error(error);
+  //   });
 
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
   return (
     <>
