@@ -24,7 +24,7 @@ const Task = ({
   const [editedTask, setEditedTask] = useState({
     title: task.title,
     description: task.description,
-    assignedTo: task.assignedTo,
+    // assignedTo: task.assignedTo,
     dueDate: task.dueDate,
   });
 
@@ -287,7 +287,7 @@ const Task = ({
                 onChange={handleChange}
               />
             </Form.Group>
-            <Form.Group controlId="assignedTo">
+            {/* <Form.Group controlId="assignedTo">
               <Form.Label>Assigned To</Form.Label>
               <Form.Control
                 type="text"
@@ -295,7 +295,7 @@ const Task = ({
                 value={editedTask.assignedTo}
                 onChange={handleChange}
               />
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group controlId="dueDate">
               <Form.Label>Due Date</Form.Label>
               <Form.Control

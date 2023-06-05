@@ -10,7 +10,7 @@ const AddNewTask = ({ columnName, boardId, columnId, setBoard, board }) => {
   const [task, setTask] = useState({
     title: "",
     description: "",
-    assignedTo: "",
+    // assignedTo: "",
     dueDate: "",
   });
   const handleInputChange = (event) => {
@@ -87,7 +87,7 @@ const AddNewTask = ({ columnName, boardId, columnId, setBoard, board }) => {
     setTask({
       title: "",
       description: "",
-      assignedTo: "",
+      // assignedTo: "",
       dueDate: "",
     });
   };
@@ -128,7 +128,7 @@ const AddNewTask = ({ columnName, boardId, columnId, setBoard, board }) => {
                 onChange={handleInputChange}
               />
             </Form.Group>
-            <Form.Group>
+            {/* <Form.Group>
               <Form.Label className="place">Task assigned to</Form.Label>
               <Form.Control
                 type="text"
@@ -138,9 +138,9 @@ const AddNewTask = ({ columnName, boardId, columnId, setBoard, board }) => {
                 value={task.assignedTo}
                 onChange={handleInputChange}
               />
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group>
-              <Form.Label className="place">Task assigned to</Form.Label>
+              <Form.Label className="place">Due date</Form.Label>
               <Form.Control
                 type="date"
                 name="dueDate"
